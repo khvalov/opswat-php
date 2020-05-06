@@ -2,6 +2,7 @@
     "name": "khvalov/opswat-php",
     "description": "OPSWAT MetaAcess API Client Library for PHP",
     "keywords": ["Opswat", "api", "metaacess"],
+    "type": "yii2-extension",
     "homepage": "https://github.com/khvalov/opswat-php",
     "license": "MIT",
     "authors": [
