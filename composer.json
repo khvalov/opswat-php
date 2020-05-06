@@ -19,10 +19,5 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.1.*"
     },
-    "autoload": {
-        "psr-0": {
-            "OpswatPhp": "lib/"
-        }
-    },
     "minimum-stability": "dev"
 }
