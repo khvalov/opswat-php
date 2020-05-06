@@ -16,5 +16,9 @@
         "ext-json": "*",
         "php": ">=5.3.0"
     },
-    "psr-4": {"khvalov\\opswat-php\\": ""}
+    "autoload": {
+        "psr-0": {
+            "OpswatPHP": "lib/"
+        }
+    }
 }
