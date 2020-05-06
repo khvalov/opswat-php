@@ -1,19 +1,28 @@
 {
     "name": "khvalov/opswat-php",
-    "description":"PHP library to communicate with OPSWAT metaacess",
-    "keywords": ["opswat metaacess"],
-    "homepage": "https://github.com/",
-    "version": "1.0.0",
+    "description": "OPSWAT MetaAcess API Client Library for PHP",
+    "keywords": ["Opswat", "api", "metaacess"],
+    "homepage": "https://github.com/khvalov/opswat-php",
+    "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-0" : {
-            "khvalov/opswat-php" : ".."
+    "authors": [
+        {
+            "name": "Val Kh",
+            "homepage": "https://github.com/khvalov/opswat-php"
         }
-
+    ],
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*",
+        "php": ">=5.3.0"
     },
-    "require":{
-        "php": ">=5.3.0",
-        "ext-json":"*",
-        "ext-curl":"*"
-    }
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "OpswatPhp": "lib/"
+        }
+    },
+    "version": "1.0.0"
 }
