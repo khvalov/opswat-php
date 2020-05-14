@@ -47,6 +47,20 @@ abstract class OpswatPHP
      *
      * @return string
      */
+
+    public static $ResponseLogger=null; 
+
+
+    public static function getResponseLogger(){
+        return self::$ResponseLogger;
+    }
+
+    public static function setResponseLogger($logger)
+    {
+        self::$ResponseLogger=$logger;
+    }
+
+
     public static function getApiKey()
     {
         return self::$apiKey;
@@ -149,4 +163,5 @@ abstract class OpswatPHP
     {
         self::$responseTimeout = $responseTimeout;
     }
+
 }

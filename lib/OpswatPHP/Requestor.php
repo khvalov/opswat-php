@@ -123,6 +123,12 @@ class Requestor
         list($httpBody, $httpStatus, $myApiKey) = $this->_requestRaw($method, $url, $params, $apiKeyRequired);
         $response = $this->_interpretResponse($httpBody, $httpStatus);
 
+
+        if(OpswatPHP::$ResponseLogger){
+            $object=OpswatPHP::$ResponseLogger;
+            $object->log($response);
+        }
+
         return array($response, $myApiKey);
     }
 
@@ -136,6 +142,7 @@ class Requestor
     private function _requestRaw($method, $url, $params, $apiKeyRequired)
     {
         $myApiKey = $this->_apiKey;
+
 
         if (!$myApiKey) {
             if (!$myApiKey = OpswatPHP::$apiKey) {
@@ -167,6 +174,7 @@ class Requestor
         }
 
         list($httpBody, $httpStatus) = $this->_curlRequest($method, $absUrl, $headers, $params, $myApiKey);
+
 
         return array($httpBody, $httpStatus, $myApiKey);
     }
