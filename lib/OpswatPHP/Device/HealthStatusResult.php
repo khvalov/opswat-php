@@ -7,6 +7,7 @@ Class HealthStatusResult {
 	
 	private $status;
 	private $issue;
+	private $log;
 
 	public function __construct(array $_settings=null){
 

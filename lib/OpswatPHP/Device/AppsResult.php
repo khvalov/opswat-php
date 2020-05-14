@@ -27,10 +27,17 @@ Class AppsResult {
 	}
 
 	public function __set($name, $value) {
-		if($name=='health_status') {
-			$value=Util::ArrayToClass(new HealthStatusResult(),$value);
-		}
 
+		if($name=='health_status' && count($value)>0) {
+			foreach ($value as $v){
+				$newValue[]=Util::ArrayToClass(new HealthStatusResult(),$v);
+			}
+			if(count($newValue)>0){
+				$value=$newValue;
+				unset($newValue);
+			}
+		}
+		
 		$this->{$name} = $value;
 	}
 

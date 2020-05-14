@@ -3,7 +3,7 @@ namespace OpswatPHP\Device;
 
 use OpswatPHP\Util;
 
-Class DetectedPatchesResult {
+Class PatchesResult {
 	
 	private $category;
 	private $titles;

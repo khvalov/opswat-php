@@ -106,5 +106,19 @@ class Device extends OpswatPHPResource
         return $_return;
 
     }
+
+    public static function remediation($params = null, $apiKey = null){
+        
+        $APIVER='3';
+
+        if(!array_key_exists('device_id', $params)) {
+            throw new Error("Device ID (device_id) have to be defined for this action");
+        }
+        $requestor = new Requestor($apiKey,$APIVER);
+        $url = self::classUrl(get_class());
+        list($response, $apiKey) = $requestor->request('get', $url.'/'.$params['device_id'].'/remediation', $params);
+
+        return $response;
+    }
    
 }
