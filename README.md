@@ -6,14 +6,17 @@ All contributions are welcome!
 
 Examples: 
 
-$deviceID='some-id';
 
-$url='https://gears.opswat.com/o/oauth/token?client_id={%CLIENT_ID%}&client_secret={%CLIENT_SECRET%}&grant_type=client_credentials';
+            $deviceID='some-id';
 
-$_tmp=json_decode(file_get_contents($url));
 
-$key=$_tmp->access_token;
+            $url='https://gears.opswat.com/o/oauth/token?client_id={%CLIENT_ID%}&client_secret={%CLIENT_SECRET%}&grant_type=client_credentials';
 
+
+            $_tmp=json_decode(file_get_contents($url));
+
+
+            $key=$_tmp->access_token;
 
             \OpswatPHP\OpswatPHP::setApiKey($key);
             
