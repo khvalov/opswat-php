@@ -120,5 +120,44 @@ class Device extends OpswatPHPResource
 
         return $response;
     }
+
+
+    public static function get_reports($params = null, $apiKey = null){
+        
+        $APIVER='3.1';
+
+        $requestor = new Requestor($apiKey,$APIVER);
+        $url = "";
+        list($response, $apiKey) = $requestor->request('get', $url.'/get_reports', $params);
+
+        return $response;
+    }
+
+    public static function get_threats($params = null, $apiKey = null){
+        
+        $APIVER='3';
+
+        if(!array_key_exists('id', $params)) {
+            throw new Error("Device ID (id) have to be defined for this action");
+        }
+
+        $requestor = new Requestor($apiKey,$APIVER);
+        $url = "";
+        list($response, $apiKey) = $requestor->request('post', $url.'/get_threats', $params);
+
+        return $response;
+    }
+
+    public static function status_changed($params = null, $apiKey = null){
+        
+        $APIVER='3';
+
+        $requestor = new Requestor($apiKey,$APIVER);
+        $url = self::classUrl(get_class());
+
+        list($response, $apiKey) = $requestor->request('post', $url.'/status_changed', $params);
+
+        return Util::ArrayToClass(new Device\StatusChangedResult(),$response);;
+    }
    
 }

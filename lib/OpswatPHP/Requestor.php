@@ -124,7 +124,7 @@ class Requestor
         $response = $this->_interpretResponse($httpBody, $httpStatus);
 
 
-        if(OpswatPHP::$ResponseLogger){
+        if(OpswatPHP::$ResponseLogger instanceof LoggerInterface && !empty(OpswatPHP::$ResponseLogger)){
             $object=OpswatPHP::$ResponseLogger;
             $object->log($response);
         }
@@ -221,8 +221,6 @@ class Requestor
         }
 
         $absUrl = self::utf8($absUrl);
-
-
 
         $curlOptions[CURLOPT_URL] = $absUrl;
         $curlOptions[CURLOPT_RETURNTRANSFER] = true;
