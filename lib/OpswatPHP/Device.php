@@ -34,7 +34,7 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('post', $url.'/'.$params['device_id'].'/delete', $params);
 
-        return $response;
+        return Util::ArrayToClass(new Device\DeleteResult(),$response);
     }
 
     public static function action($params = null, $apiKey = null){
@@ -48,7 +48,13 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('post', $url.'/action', $params);
         
-        return $response;
+        if(is_array($response) && count($response)>0) {
+            foreach ($response as $v){
+                $_return[]=Util::ArrayToClass(new Device\ActionResult(),$v);
+            }
+        }
+
+        return $_return;
     }
 
     public static function info($params = null, $apiKey = null){
@@ -78,7 +84,7 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('post', $url.'/policy_check', $params);
         
-        return $response;
+        return Util::ArrayToClass(new Device\PolicyCheckResult(),$response);
     }
 
     public static function stats($params = null, $apiKey = null){
@@ -88,7 +94,7 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('get', $url.'/stats', $params);
         
-        return $response;
+        return Util::ArrayToClass(new Device\StatsResult(),$response);
     }
 
     public static function all($params = null, $apiKey = null){
@@ -118,7 +124,7 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('get', $url.'/'.$params['device_id'].'/remediation', $params);
 
-        return $response;
+        return Util::ArrayToClass(new Device\RemediationResult(),$response);
     }
 
 
@@ -128,9 +134,17 @@ class Device extends OpswatPHPResource
 
         $requestor = new Requestor($apiKey,$APIVER);
         $url = "";
+
+        if(!array_key_exists('type', $params){
+            throw new Error("Type is shoud be defined for this action");
+        }
+        if( $params['type']=='os_patch_summary') || $params['type']=='device_missing_os_patch' || $params['type']=='missing_os_patch'){
+            throw new Error("This function is not implemented");
+        }
+
         list($response, $apiKey) = $requestor->request('get', $url.'/get_reports', $params);
 
-        return $response;
+        return Util::ArrayToClass(new Device\GetReportsResult(),$response);
     }
 
     public static function get_threats($params = null, $apiKey = null){
@@ -145,7 +159,7 @@ class Device extends OpswatPHPResource
         $url = "";
         list($response, $apiKey) = $requestor->request('post', $url.'/get_threats', $params);
 
-        return $response;
+        return Util::ArrayToClass(new Device\GetThreatsResult(),$response);
     }
 
     public static function status_changed($params = null, $apiKey = null){
