@@ -5,11 +5,16 @@ namespace OpswatPHP;
 abstract class Util
 {
 
-    public static function ArrayToClass($object, array $array){
+    public static function ArrayToClass($object, array $array,$checkIfPropertyExists=true){
         foreach ($array as $key => $value) {
-            if(property_exists($object, $key)){
+            $key=preg_replace('/[^A-z]/', "", $key);
+            if($checkIfPropertyExists==true){
+                if(property_exists($object, $key)){
+                    $object->$key=$value;
+                };
+            } else {
                 $object->$key=$value;
-            };
+            }
         }
         return $object;
     }

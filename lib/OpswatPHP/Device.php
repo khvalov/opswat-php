@@ -1,11 +1,10 @@
 <?php
 //https://onlinehelp.opswat.com/metaaccess/1.2.2._Devices.html
-
 namespace OpswatPHP;
 
 class Device extends OpswatPHPResource
 {
-
+    
     public static function details($params = null, $apiKey = null){
         $APIVER='3.3';
 
@@ -14,13 +13,7 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('post', $url.'/detail', $params);
 
-        if(is_array($response) && count($response)>0) {
-            foreach ($response as $v){
-                $_return[]=Util::ArrayToClass(new Device\DeviceResult(),$v);
-            }
-        }
-
-        return $_return;
+        return new ResultIterator($response,new Device\DeviceResult());
     }
 
     public static function delete($params = null, $apiKey = null){
@@ -47,14 +40,9 @@ class Device extends OpswatPHPResource
         $requestor = new Requestor($apiKey,$APIVER);
         $url = self::classUrl(get_class());
         list($response, $apiKey) = $requestor->request('post', $url.'/action', $params);
-        
-        if(is_array($response) && count($response)>0) {
-            foreach ($response as $v){
-                $_return[]=Util::ArrayToClass(new Device\ActionResult(),$v);
-            }
-        }
 
-        return $_return;
+
+        return new ResultIterator($response,new Device\ActionResult());
     }
 
     public static function info($params = null, $apiKey = null){
@@ -67,14 +55,9 @@ class Device extends OpswatPHPResource
         $requestor = new Requestor($apiKey,$APIVER);
         $url = "";
         list($response, $apiKey) = $requestor->request('post', $url.'/device_info', $params);
-        
-        if(is_array($response) && count($response)>0) {
-            foreach ($response as $v){
-                $_return[]=Util::ArrayToClass(new Info\InfoResult(),$v);
-            }
-        }
 
-        return $_return;
+        return new ResultIterator($response,new Info\InfoResult());
+        
     }
 
     public static function policy_check($params = null, $apiKey = null){
@@ -104,13 +87,8 @@ class Device extends OpswatPHPResource
         $url = self::classUrl(get_class());
 
         list($response, $apiKey) = $requestor->request('post', $url, $params);
-        if(is_array($response) && count($response)>0) {
-            foreach ($response as $v){
-                $_return[]=Util::ArrayToClass(new Device\InfoResult(),$v);
-            }
-        }
-        return $_return;
 
+        return new ResultIterator($response,new Info\InfoResult());
     }
 
     public static function remediation($params = null, $apiKey = null){
