@@ -135,10 +135,10 @@ class Device extends OpswatPHPResource
         $requestor = new Requestor($apiKey,$APIVER);
         $url = "";
 
-        if(!array_key_exists('type', $params){
+        if(!array_key_exists('type', $params)){
             throw new Error("Type is shoud be defined for this action");
         }
-        if( $params['type']=='os_patch_summary') || $params['type']=='device_missing_os_patch' || $params['type']=='missing_os_patch'){
+        if( ($params['type']=='os_patch_summary') || ($params['type']=='device_missing_os_patch') || ($params['type']=='missing_os_patch')){
             throw new Error("This function is not implemented");
         }
 
