@@ -52,10 +52,12 @@ Class DeviceResult {
 
 	public function getCategory($key){
 		$categories=$this->categories;
-
-		foreach ($categories as $value){
-			if($value->category_id==$key){
-				return $value;
+		
+		if(is_iterable($categories)){
+			foreach ($categories as $value){
+				if($value->category_id==$key){
+					return $value;
+				}
 			}
 		}
 		return null;
